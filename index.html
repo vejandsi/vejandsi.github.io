@@ -74,7 +74,9 @@
           <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-red"></i>Graduate Student / University of Cincinnati</p>
           <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-red"></i>Ohio, USA</p>
           <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-red"></i>vejandsi@mail.uc.edu</p>
-          <p><a href="http://www.linkedin.com/in/sushma-sai-vejandla"><i class="fa fa-linkedin fa-fw w3-margin-right w3-large w3-text-red"></i></a>Click to connect
+          <p><a href="http://www.linkedin.com/in/sushma-sai-vejandla"><i class="fa fa-linkedin fa-fw w3-margin-right w3-large w3-text-red"></i></a>click to connect
+          </p>
+          <p><a href="https://drive.google.com/file/d/1jm30BaJPWpjguepjJEV-QzfdCNNku3xM/view?usp=share_link"><i class="fa fa-file fa-fw w3-margin-right w3-large w3-text-red"></i></a>Resume on click
           </p>
 
           <hr>
@@ -266,13 +268,13 @@
       <!-- Menubar section -->
       <div id="app">
         <h2>Reminders</h2>
-        <input type="text" v-model="newTask" @keyup.enter="addTask">
+        <input type="text" v-model="T1" @keyup.enter="TAd">
        
-       <button @click="addTask">Log</button>
+       <button @click="TAd">Log</button>
        <ul><li v-for="(task, index) in tasks" :key="index">
         <input type="checkbox" v-model="task.completed"> 
         <span :class="{ completed: task.completed }">{{ task.text }}</span>
-        <button @click="deleteTask(index)">Mark as done</button>
+        <button @click="delT(index)">Mark as done</button>
     </li></ul>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
@@ -295,17 +297,17 @@
 new Vue({
                 el: '#app',
                 data: {
-                    newTask: '',
+                    T1: '',
                     tasks: []
                 },
                 methods: {
-                    addTask() {
-                        if (this.newTask.trim() !== '') {
-                            this.tasks.push({ text: this.newTask, completed: false });
-                            this.newTask = '';
+                    TAd() {
+                        if (this.T1.trim() !== '') {
+                            this.tasks.push({ text: this.T1, completed: false });
+                            this.T1 = '';
                         }
                     },
-                    deleteTask(index) {
+                    delT(index) {
                         this.tasks.splice(index, 1);
                     }
                 }
@@ -350,34 +352,32 @@ function displayTime(){
     
     <script type="text/javascript">
       // Function to set a cookie
-   function setCookie(name, value, days) {
+   function CookieSet(name, value, days) {
      const expires = new Date();
      expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
      document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
    }
 
-   // Function to get the value of a cookie by name
-   function getCookie(name) {
+   // cookie
+   function CookieGet(name) {
      const keyValue = document.cookie.match(`(^|;) ?${name}=([^;]*)(;|$)`);
      return keyValue ? keyValue[2] : null;
    }
 
-   // Function to display a welcome message based on cookie
+   // Cookie display
    function displayWelcomeMessage() {
-     const lastVisit = getCookie('lastVisit');
+     const lastVisit = CookieGet('lastVisit');
 
      if (!lastVisit) {
-       // First-time visit
+       
        const currentDate = new Date().toLocaleString();
        alert('Welcome to my homepage!');
-       setCookie('lastVisit', currentDate, 365); // Set cookie to expire in 365 days
+       CookieSet('lastVisit', currentDate, 365); // 
      } else {
-       // Returning visit
+       
        alert(`Welcome back! Your last visit was ${lastVisit}`);
      }
-   }
-
-   // Call the function on page load
+   }   
    window.onload = displayWelcomeMessage;
  </script>
    
@@ -400,7 +400,7 @@ function displayTime(){
                   <img id="Image" width="300" height="300" src="">
                </div>
                <script>
-                  function makeid(length) {
+                  function makingid(length) {
                      let result = '';
                      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
                      const charactersLength = characters.length;
@@ -412,7 +412,7 @@ function displayTime(){
                      return result;
                   }
                   
-                  randtext = makeid(5)
+                  randtext = makingid(5)
                   $.getJSON('https://picsum.photos/seed/'+randtext+'/info', function(data) {
                     console.log(data);
                   
