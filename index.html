@@ -163,6 +163,7 @@
     <!-- End Left Column -->
     </div>
 
+
     <!-- Right Column -->
     <div class="w3-twothird">
     
@@ -223,6 +224,8 @@
           <p>Bachelor Degree</p><br>
         </div>
       </div>-->
+
+
 
     <!-- End Right Column -->
     </div>
@@ -377,16 +380,8 @@ function displayTime(){
    // Call the function on page load
    window.onload = displayWelcomeMessage;
  </script>
-    
-    
-    
+   
      <div id="response"></div> 
-    
-    
-   
-  
-                
-   
 
       <!-- Main content -->
       <div id="main">
@@ -399,8 +394,40 @@ function displayTime(){
     </div>
 </div>  
 
-<footer class="w3-container w3-pink w3-center w3-margin-top">
-  
+<footer class="w3-container w3-pink w3-center w3-margin-top"> 
+  <div class="column-121 w-col w-col-3">
+               <div id="container">
+                  <img id="Image" width="300" height="300" src="">
+               </div>
+               <script>
+                  function makeid(length) {
+                     let result = '';
+                     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                     const charactersLength = characters.length;
+                     let counter = 0;
+                     while (counter < length) {
+                        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                        counter += 1;
+                     }
+                     return result;
+                  }
+                  
+                  randtext = makeid(5)
+                  $.getJSON('https://picsum.photos/seed/'+randtext+'/info', function(data) {
+                    console.log(data);
+                  
+                    imgurl = data.download_url;
+                    console.log(imgurl)
+                    $('#Image').attr('src', imgurl);
+                  
+                  })
+                  .fail(function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error fetching data:', textStatus, errorThrown);
+                  });
+               </script>
+            </div>
+            
+            
   <br><a href="https://info.flagcounter.com/mioF"><img src="https://s11.flagcounter.com/count2/miof/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/"alt="Flag Counter"border="0"></a>
 </footer>
 
