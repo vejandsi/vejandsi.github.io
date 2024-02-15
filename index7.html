@@ -31,20 +31,6 @@
     }
 
     html,body,h1,h2,h3,h4,h5,h6 {font-family: "Times New Roman", serif}
-
-    #image-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-
-/* CSS styles for individual images */
-#image-container img {
-    width: 300px;
-    height: auto;
-}
-
 </style>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <!-- Internal script from HTML-2 -->
@@ -259,18 +245,6 @@
     <!-- Main content wrapper -->
     <div class="wrapper w3-card w3-pink w3-margin-top w3-margin-bottom">
       <!-- Menubar section -->
-      <div id="app">
-        <h1>To-Do List</h1>
-        <input type="text" v-model="newTask" @keyup.enter="addTask">
-       
-       <button @click="addTask">Add Task</button>
-       <ul><li v-for="(task, index) in tasks" :key="index">
-        <input type="checkbox" v-model="task.completed"> 
-        <span :class="{ completed: task.completed }">{{ task.text }}</span>
-        <button @click="deleteTask(index)">Delete</button>
-    </li></ul>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
       <div id="menubar">
         <!-- Menubar content from HTML-2 -->
         <h3>Web Application Programming and Hacking</h3>
@@ -280,56 +254,64 @@
        <canvas id="analog-clock" width="150" height="150" style="background-color: #999"></canvas>
        <script src="https://waph-uc.github.io/clock.js"></script>
       </div>
-    </div>
-     
-      
       
   <script type="text/javaScript">
 
 
-new Vue({
-                el: '#app',
-                data: {
-                    newTask: '',
-                    tasks: []
-                },
-                methods: {
-                    addTask() {
-                        if (this.newTask.trim() !== '') {
-                            this.tasks.push({ text: this.newTask, completed: false });
-                            this.newTask = '';
-                        }
-                    },
-                    deleteTask(index) {
-                        this.tasks.splice(index, 1);
-                    }
-                }
-            });
-
-      </script>      
+             // Function to set a cookie
+             function setCookie(name, value, days) {
+            const expires = new Date();
+            expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+            document.cookie = '${name}=${value};expires=${expires.toUTCString()};path=/';
+          }
+      
+          // Function to get the value of a cookie by name
+          function getCookie(name) {
+            const keyValue = document.cookie.match(`(^|;) ?${name}=([^;]*)(;|$)`);
+            return keyValue ? keyValue[2] : null;
+          }
+      
+          // Function to display a welcome message based on cookie
+          function displayWelcomeMessage() {
+            const lastVisit = getCookie('lastVisit');
+      
+            if (!lastVisit) {
+              // First-time visit
+              const currentDate = new Date().toLocaleString();
+              alert('Welcome to my homepage!');
+              setCookie('lastVisit', currentDate, 365); // Set cookie to expire in 365 days
+            } else {
+              // Returning visit
+              alert(`Welcome back! Your last visit was ${lastVisit}`);
+            }
+          }
+      
+          // Call the function on page load
+          window.onload = displayWelcomeMessage;
         
-<script>
-function displayTime(){
-  document.getElementById('digit-clock').innerHTML = "Current time: " + new Date();
- }
- setInterval(displayTime,500);
- 
- 
- var canvas= document.getElementById("analog-clock");
- var ctx = canvas.getContext("2d");
- var radius = canvas.height / 2;
- ctx.translate(radius, radius);
- radius=radius * 0.90
- setInterval(drawClock,1000);
 
- function drawClock(){
-  drawFace(ctx, radius);
-  drawNumbers(ctx, radius);
-  drawTime(ctx,radius);
- }</script>
-    
+    function displayTime(){
+        document.getElementById('digit-clock').innerHTML = "Current time: " + new Date();
+       }
+       setInterval(displayTime,500);
+       
+       
+       var canvas= document.getElementById("analog-clock");
+       var ctx = canvas.getContext("2d");
+       var radius = canvas.height / 2;
+       ctx.translate(radius, radius);
+       radius=radius * 0.90
+       setInterval(drawClock,1000);
 
-    <script> function fetchJokeOfTheDay() {
+       function drawClock(){
+        drawFace(ctx, radius);
+        drawNumbers(ctx, radius);
+        drawTime(ctx,radius);
+       }
+
+       
+       
+       function fetchJokeOfTheDay() {
       $.get("https://V2.jokeapi.dev/joke/Programming?type=single", function(result) {
         console.log("From jokeAPI: " + JSON.stringify(result));
         var joke = result.joke;
@@ -341,55 +323,51 @@ function displayTime(){
     fetchJokeOfTheDay();
 
     // Update joke of the day every 1 minute
-    setInterval(fetchJokeOfTheDay, 60000);</script>  
+    setInterval(fetchJokeOfTheDay, 60000);
     
-    <script type="text/javascript">
-      // Function to set a cookie
-   function setCookie(name, value, days) {
-     const expires = new Date();
-     expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-     document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
-   }
-
-   // Function to get the value of a cookie by name
-   function getCookie(name) {
-     const keyValue = document.cookie.match(`(^|;) ?${name}=([^;]*)(;|$)`);
-     return keyValue ? keyValue[2] : null;
-   }
-
-   // Function to display a welcome message based on cookie
-   function displayWelcomeMessage() {
-     const lastVisit = getCookie('lastVisit');
-
-     if (!lastVisit) {
-       // First-time visit
-       const currentDate = new Date().toLocaleString();
-       alert('Welcome to my homepage!');
-       setCookie('lastVisit', currentDate, 365); // Set cookie to expire in 365 days
-     } else {
-       // Returning visit
-       alert(`Welcome back! Your last visit was ${lastVisit}`);
-     }
-   }
-
-   // Call the function on page load
-   window.onload = displayWelcomeMessage;
- </script>
-    
-    
-    
-     <div id="response"></div> 
-    
-    
-   
-  
-                
+    $(document).ready(function() {
+    new Vue({
+        el: '#app',
+        data: {
+            newTask: '',
+            tasks: []
+        },
+        methods: {
+            addTask: function() {
+                if (this.newTask.trim() !== '') {
+                    this.tasks.push({
+                        name: this.newTask,
+                        completed: false
+                    });
+                    this.newTask = '';
+                }
+            },
+            removeTask: function(index) {
+                this.tasks.splice(index, 1);
+            }
+        }
+    });
+});
    
 
+    
+  </script>
       <!-- Main content -->
       <div id="main">
         <!-- Main content from HTML-2 -->
       </div>
+
+  
+      <div>
+         <div id="response"></div>
+         <div id="app">
+          <h1>To-Do List</h1>
+          <input type="text" spellcheck="false" data-ms-editor="true">
+         <button>Add Task</button>
+         <ul></ul>
+      </div>
+  
+      <script src="todo.js"></script>
   
       </div>
   
