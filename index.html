@@ -262,14 +262,14 @@
     <div class="wrapper w3-card w3-white w3-margin-top w3-margin-bottom">
       <!-- Menubar section -->
       <div id="app">
-        <h2>To-Do List</h2>
+        <h2>Reminders</h2>
         <input type="text" v-model="newTask" @keyup.enter="addTask">
        
-       <button @click="addTask">Add Task</button>
+       <button @click="addTask">Log</button>
        <ul><li v-for="(task, index) in tasks" :key="index">
         <input type="checkbox" v-model="task.completed"> 
         <span :class="{ completed: task.completed }">{{ task.text }}</span>
-        <button @click="deleteTask(index)">Delete</button>
+        <button @click="deleteTask(index)">Mark as done</button>
     </li></ul>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
